@@ -53,11 +53,15 @@
                                        autofocus>
                             </div>
                             <div id="emailRepeatDiv" class="form-group">
-                                <input class="form-control" placeholder="Repeat E-mail" id="emailRepeat"
+                                <input class="form-control" placeholder="Repeat e-mail" id="emailRepeat"
                                        name="emailRepeat" type="text" autofocus>
                             </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password"
+                            <div id="passwordDiv" class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" id="password" type="password"
+                                       value="">
+                            </div>
+                            <div id="passwordRepeatDiv" class="form-group">
+                                <input class="form-control" placeholder="Repeat password" id="passwordRepeat" name="passwordRepeat" type="password"
                                        value="">
                             </div>
                             <div class="checkbox">
@@ -66,7 +70,7 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                            <input class="btn btn-lg btn-success btn-block" type="submit" id="registerSubmit">Register</a>
                         </fieldset>
                     </form>
                 </div>
@@ -87,7 +91,7 @@
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
-<script type="text/javascript" src="../js/validation.js"></script>
+<script type="text/javascript" src="../js/registration-validation.js"></script>
 </body>
 
 </html>
