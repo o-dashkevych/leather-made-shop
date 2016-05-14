@@ -6,9 +6,11 @@ var warningsFuncsSet = new Set();
 /*On submit warning check */
 
 function showWarningsIfSubmit(event) {
-    if (warningsFuncsSet.size == 0) {
+    if (warningsFuncsSet.size != 0) {
         event.preventDefault();
-        warningsFuncsSet.forEach(func => window[func]());
+        warningsFuncsSet.forEach(function (item) {
+            window[item]();
+        })
     }
 }
 
@@ -159,8 +161,8 @@ function setListenersAndWarnings() {
     attachEventToElement("password", "input", setWarningIfInvalidRepeatPassword);
     attachEventToElement("password", "blur", setWarningIfInvalidRepeatPassword);
     attachEventToElement("passwordRepeat", "input", setWarningIfInvalidRepeatPassword);
-    
+
     attachEventToElement("registerSubmit", "submit", showWarningsIfSubmit(Event))
 }
 
-setListeners();
+setListenersAndWarnings();
