@@ -1,8 +1,8 @@
-var warningsFuncsSet = new Set();
+var warningsFunctionsSet = new Set();
 
 function removeWarningFunctionAndMessage(functionName, warningAttachedId) {
     console.log(functionName);
-    warningsFuncsSet.delete(functionName);
+    warningsFunctionsSet.delete(functionName);
     $(getById(warningAttachedId + "Warning")).html("");
 }
 
@@ -51,7 +51,7 @@ function validateLogin(loginId) {
 function setWarningIfInvalidLogin() {
     var itemId = "login";
     if (!validateLogin(itemId)) {
-        warningsFuncsSet.add(setWarningIfInvalidLogin);
+        warningsFunctionsSet.add(setWarningIfInvalidLogin);
         showWarningAfterItem("login", "Invalid login");
     } else removeWarningFunctionAndMessage(setWarningIfInvalidLogin, itemId);
 }
@@ -62,7 +62,7 @@ function setWarningIfInvalidEmail(event) {
     var itemId = "email";
     if (!validateEmail(itemId)) {
         showWarningAfterItem(itemId, "Invalid Email Address");
-        warningsFuncsSet.add(setWarningIfInvalidEmail);
+        warningsFunctionsSet.add(setWarningIfInvalidEmail);
     } else removeWarningFunctionAndMessage(setWarningIfInvalidEmail, itemId);
 };
 
@@ -76,7 +76,7 @@ function validateEmail(email) {
 function setWarningIfInvalidRepeatEmail(event) {
     var itemId = "emailRepeat";
     if (!validateRepeatValues("email", itemId)) {
-        warningsFuncsSet.add(setWarningIfInvalidRepeatEmail);
+        warningsFunctionsSet.add(setWarningIfInvalidRepeatEmail);
         showWarningAfterItem(itemId, "Emails doesn't match");
     } else removeWarningFunctionAndMessage(setWarningIfInvalidRepeatEmail, itemId);
 }
@@ -93,7 +93,7 @@ function setWarningIfInvalidPassword() {
     var itemId = "password";
     if (!validatePassword(itemId)) {
         showWarningAfterItem(itemId, "Invalid password");
-        warningsFuncsSet.add(setWarningIfInvalidPassword);
+        warningsFunctionsSet.add(setWarningIfInvalidPassword);
     } else removeWarningFunctionAndMessage(setWarningIfInvalidPassword, itemId);
 }
 
@@ -105,16 +105,16 @@ function setWarningIfInvalidRepeatPassword() {
     if (!validateRepeatValues("password", itemId)) {
         console.log("Invalid Repeat Password");
         showWarningAfterItem(itemId, "Passwords doesn't match");
-        warningsFuncsSet.add(setWarningIfInvalidRepeatPassword);
+        warningsFunctionsSet.add(setWarningIfInvalidRepeatPassword);
     } else removeWarningFunctionAndMessage(setWarningIfInvalidRepeatPassword, itemId);
 }
 
 /*On submit warning check */
 
 function showWarningsIfSubmit(eventObject) {
-    if (warningsFuncsSet.size !== 0) {
+    if (warningsFunctionsSet.size !== 0) {
         eventObject.preventDefault();
-        warningsFuncsSet.forEach(function (item) {
+        warningsFunctionsSet.forEach(function (item) {
             item();
         });
         return false;
@@ -123,23 +123,23 @@ function showWarningsIfSubmit(eventObject) {
 }
 
 function setListenersAndWarnings() {
-    warningsFuncsSet.add(setWarningIfInvalidLogin);
+    warningsFunctionsSet.add(setWarningIfInvalidLogin);
     attachEventToElement("login", "input", setWarningIfInvalidLogin);
     attachEventToElement("login", "blur", setWarningIfInvalidLogin);
 
-    warningsFuncsSet.add(setWarningIfInvalidEmail);
+    warningsFunctionsSet.add(setWarningIfInvalidEmail);
     attachEventToElement("email", "input", setWarningIfInvalidEmail);
     attachEventToElement("email", "blur", setWarningIfInvalidEmail);
 
-    warningsFuncsSet.add(setWarningIfInvalidRepeatEmail);
+    warningsFunctionsSet.add(setWarningIfInvalidRepeatEmail);
     attachEventToElement("email", "blur", setWarningIfInvalidRepeatEmail);
     attachEventToElement("emailRepeat", "input", setWarningIfInvalidRepeatEmail);
 
-    warningsFuncsSet.add(setWarningIfInvalidPassword);
+    warningsFunctionsSet.add(setWarningIfInvalidPassword);
     attachEventToElement("password", "blur", setWarningIfInvalidPassword);
     attachEventToElement("password", "input", setWarningIfInvalidPassword);
 
-    warningsFuncsSet.add(setWarningIfInvalidRepeatPassword);
+    warningsFunctionsSet.add(setWarningIfInvalidRepeatPassword);
     attachEventToElement("password", "input", setWarningIfInvalidRepeatPassword);
     attachEventToElement("password", "blur", setWarningIfInvalidRepeatPassword);
     attachEventToElement("passwordRepeat", "input", setWarningIfInvalidRepeatPassword);
