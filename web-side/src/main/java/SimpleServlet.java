@@ -13,6 +13,6 @@ public class SimpleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/pages/index.html").forward(req, resp);
+        req.getRequestDispatcher("/pages/index.jsp").forward(req, resp);
     }
 }
