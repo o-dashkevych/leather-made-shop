@@ -1,0 +1,40 @@
+<%@include file="/fragments/encoding.jspf" %>
+<%@include file="/fragments/taglib.jspf" %>
+
+<form role="form" action="/register">
+    <fieldset>
+        <div id="nameDiv" class="form-group">
+            <input class="form-control" placeholder="Name" id="name" name="name" type="text"
+                   autofocus>
+        </div>
+        <div id="surnameDiv" class="form-group">
+            <input class="form-control" placeholder="Surname" id="surname" name="surname" type="text"
+                   autofocus>
+        </div>
+        <div id="emailDiv" class="form-group">
+            <input class="form-control" placeholder="E-mail" id="email" name="email" type="text"
+                   autofocus>
+        </div>
+        <div id="emailRepeatDiv" class="form-group">
+            <input class="form-control" placeholder="Repeat e-mail" id="emailRepeat"
+                   name="emailRepeat" type="text" autofocus>
+        </div>
+        <div id="passwordDiv" class="form-group">
+            <input class="form-control" placeholder="Password" name="password" id="password" type="password"
+                   value="">
+        </div>
+        <div id="passwordRepeatDiv" class="form-group">
+            <input class="form-control" placeholder="Repeat password" id="passwordRepeat" name="passwordRepeat"
+                   type="password"
+                   value="">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+            </label>
+        </div>
+        <tf:captcha-tag/>
+        <!-- Change this to a button or input when using this as a form -->
+        <input class="btn btn-lg btn-success btn-block" type="submit" id="registerSubmit" value="Register">
+    </fieldset>
+</form>

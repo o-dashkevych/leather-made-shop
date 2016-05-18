@@ -1,38 +1,11 @@
 <%@include file="/fragments/encoding.jspf" %>
 <%@include file="/fragments/taglib.jspf" %>
 
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-
-<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Leather Shop</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<%-- <%@include file="/WEB-INF/fragments/header.jspf" %> --%>
-
+    <%@include file="/fragments/header.jspf" %>
 </head>
 
 <body>
-
-
 <%@include file="/fragments/navigation.jspf" %>
 
 <!-- Page Content -->
@@ -53,13 +26,13 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img class="slide-image" src="../images/products/strap_1.jpg" alt="">
+                                <img class="slide-image" src="<c:url value="/images/products/strap_1.jpg"/>" alt="">
                             </div>
                             <div class="item">
-                                <img class="slide-image" src="../images/products/clutch_1.jpg" alt="">
+                                <img class="slide-image" src="<c:url value="/images/products/clutch_1.jpg"/>" alt="">
                             </div>
                             <div class="item">
-                                <img class="slide-image" src="../images/products/strap_3.jpg" alt="">
+                                <img class="slide-image" src="<c:url value="/images/products/strap_3.jpg"/>" alt="">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -77,13 +50,13 @@
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <img src="../images/products/strap_1.jpg" alt="">
+                        <img src="<c:url value="/images/products/strap_1.jpg"/>" alt="">
                         <div class="caption">
                             <h4>$24.99</h4>
-                            <h4><a href="">Ремешок для часов "NATO"</a>
+                            <h4><a href="">Watchband "NATO"</a>
                             </h4>
-                            <p>Аксессуар сделан из качественной натуральной кожи. <a target="_blank"
-                                                                                     href="http://weareable.com.ua/products/80/81/369.htm">We
+                            <p>The accessory is made from high quality leather.<a target="_blank"
+                                                                                  href="http://weareable.com.ua/products/80/81/369.htm">We
                                 are able</a>.</p>
                         </div>
                     </div>
@@ -91,49 +64,49 @@
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <img src="../images/products/strap_2.jpg" alt="">
+                        <img src="<c:url value="/images/products/strap_2.jpg"/>" alt="">
                         <div class="caption">
                             <h4>$64.99</h4>
-                            <h4><a href="#">Браслет "Спираль"</a>
+                            <h4><a href="#">Bracelet "Spiral"</a>
                             </h4>
-                            <p>Браслет сделан из качественной натуральной кожи с металлической фурнитурой.</p>
+                            <p>The bracelet is made of high quality genuine leather with metal fittings.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <img src="../images/products/strap_3.jpg" alt="">
+                        <img src="<c:url value="/images/products/strap_3.jpg"/>" alt="">
                         <div class="caption">
                             <h4>$74.99</h4>
-                            <h4><a href="#">Браслет "Спираль"</a>
+                            <h4><a href="#">Bracelet "Spiral"</a>
                             </h4>
-                            <p>Браслет сделан из качественной натуральной кожи с металлической фурнитурой. </p>
+                            <p>The bracelet is made of high quality genuine leather with metal fittings. </p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <img src="../images/products/clutch_1.jpg" alt="">
+                        <img src="<c:url value="/images/products/clutch_1.jpg"/>" alt="">
                         <div class="caption">
                             <h4>$84.99</h4>
-                            <h4><a href="#">Клатч "Клевер"</a>
+                            <h4><a href="#">Clutch "Clover"</a>
                             </h4>
-                            <p>Удобная и функциональная модель клатча, которую можно использовать как кошелек или чехол
-                                для документов.</p>
+                            <p>Comfortable and functional model of the clutch, which can be used as a purse or bag for
+                                documents.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <img src="../images/products/purse_1.jpg" alt="">
+                        <img src="<c:url value="/images/products/purse_1.jpg"/>" alt="">
                         <div class="caption">
                             <h4>$94.99</h4>
-                            <h4><a href="#">Портмоне "Луна"</a>
+                            <h4><a href="#">Purse "Moon"</a>
                             </h4>
-                            <p>Удобный и практичный кошелек из натуральной кожи с металлической фурнитурой.</p>
+                            <p>Convenient and practical wallet made of genuine leather with metal fittings.</p>
                         </div>
                     </div>
                 </div>

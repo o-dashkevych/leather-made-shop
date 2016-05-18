@@ -1,6 +1,6 @@
 /* General functions for validation and elements processing */
 
-var warningsFunctionsSet = new Set();
+var warningsFunctionsSet;
 
 function isExist(id) {
     var result = document.getElementById(id) !== null;
@@ -77,18 +77,26 @@ function showWarningsIfSubmit(eventObject) {
     return true;
 }
 
-/* Login input validation*/
+/* Name input validation*/
 
-function validateLogin(firstEmailField) {
+function validateName(firstEmailField) {
     var login = document.getElementsByName(firstEmailField)[0].value
-        , loginPattern = /^([a-zA-Z]+[0-9]*){4,10}$/i;
+        , loginPattern = /^([a-zA-Z]+[0-9]*){3,30}$/i;
     return loginPattern.test(login);
 }
 
-function setWarningIfInvalidLogin() {
-    var isValidLogin = validateLogin("login");
-    addOrRemoveWarningFunction(setWarningIfInvalidLogin, isValidLogin);
-    setWarningTextIfInvalid("loginDiv", "warningLogin", "Invalid login", isValidLogin);
+function setWarningIfInvalidName() {
+    var isValidName = validateName("name");
+    addOrRemoveWarningFunction(setWarningIfInvalidName, isValidName);
+    setWarningTextIfInvalid("nameDiv", "warningName", "Invalid name", isValidName);
+}
+
+/* Surname input validation*/
+
+function setWarningIfInvalidSurname() {
+    var isValidSurname = validateName("surname");
+    addOrRemoveWarningFunction(setWarningIfInvalidName, isValidSurname);
+    setWarningTextIfInvalid("surnameDiv", "warningSurname", "Invalid surname", isValidSurname);
 }
 
 
@@ -137,9 +145,14 @@ function setWarningIfInvalidRepeatPassword() {
 }
 
 function setListenersAndWarnings() {
-    warningsFunctsSet.add(setWarningIfInvalidLogin);
-    attachEventToElement("login", "input", setWarningIfInvalidLogin);
-    attachEventToElement("login", "blur", setWarningIfInvalidLogin);
+    warningsFunctionsSet = new Set();
+    warningsFunctionsSet.add(setWarningIfInvalidName);
+    attachEventToElement("name", "input", setWarningIfInvalidName);
+    attachEventToElement("name", "blur", setWarningIfInvalidName);
+
+    warningsFunctionsSet.add(setWarningIfInvalidSurname);
+    attachEventToElement("surname", "input", setWarningIfInvalidSurname);
+    attachEventToElement("surname", "blur", setWarningIfInvalidSurname);
 
     warningsFunctionsSet.add(setWarningIfInvalidEmail);
     attachEventToElement("email", "input", setWarningIfInvalidEmail);

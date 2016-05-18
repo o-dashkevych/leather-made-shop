@@ -42,18 +42,26 @@ function validateRepeatValues(firstField, secondField) {
 
 /* Login input validation*/
 
-function validateLogin(loginId) {
+function validateName(loginId) {
     var login = $(getById(loginId)).val();
     var loginPattern = /^([a-zA-Z]+[0-9]*){4,10}$/i;
     return loginPattern.test(login);
 }
 
-function setWarningIfInvalidLogin() {
-    var itemId = "login";
-    if (!validateLogin(itemId)) {
-        warningsFunctionsSet.add(setWarningIfInvalidLogin);
-        showWarningAfterItem("login", "Invalid login");
-    } else removeWarningFunctionAndMessage(setWarningIfInvalidLogin, itemId);
+function setWarningIfInvalidName() {
+    var itemId = "name";
+    if (!validateName(itemId)) {
+        warningsFunctionsSet.add(setWarningIfInvalidName);
+        showWarningAfterItem("name", "Invalid name");
+    } else removeWarningFunctionAndMessage(setWarningIfInvalidName, itemId);
+}
+
+function setWarningIfInvalidSurname() {
+    var itemId = "surname";
+    if (!validateName(itemId)) {
+        warningsFunctionsSet.add(setWarningIfInvalidName);
+        showWarningAfterItem("name", "Invalid name");
+    } else removeWarningFunctionAndMessage(setWarningIfInvalidSurname, itemId);
 }
 
 /* Email input validation*/
@@ -123,9 +131,13 @@ function showWarningsIfSubmit(eventObject) {
 }
 
 function setListenersAndWarnings() {
-    warningsFunctionsSet.add(setWarningIfInvalidLogin);
-    attachEventToElement("login", "input", setWarningIfInvalidLogin);
-    attachEventToElement("login", "blur", setWarningIfInvalidLogin);
+    warningsFunctionsSet.add(setWarningIfInvalidName);
+    attachEventToElement("name", "input", setWarningIfInvalidName);
+    attachEventToElement("name", "blur", setWarningIfInvalidName);
+
+    warningsFunctionsSet.add(setWarningIfInvalidName);
+    attachEventToElement("surname", "input", setWarningIfInvalidName);
+    attachEventToElement("surname", "blur", setWarningIfInvalidName);
 
     warningsFunctionsSet.add(setWarningIfInvalidEmail);
     attachEventToElement("email", "input", setWarningIfInvalidEmail);

@@ -12,16 +12,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Leather Made Shop</a>
+            <a class="navbar-brand" href="<c:url value="/home"/>">Leather Made Shop</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/pages/register.jsp">Register JS</a>
+                    <a href="<c:url value="/register"/>">Register JS</a>
                 </li>
                 <li>
-                    <a href="/pages/register jquery.jsp">Register JQuery</a>
+                    <a href="<c:url value="/pages/register-jquery.jsp"/>">Register JQuery</a>
                 </li>
                 <li>
                     <a href="#">Contact</a>
