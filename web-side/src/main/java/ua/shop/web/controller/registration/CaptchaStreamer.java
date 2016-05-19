@@ -1,6 +1,6 @@
 package ua.shop.web.controller.registration;
 
-import ua.shop.captcha.provider.CaptchaProvider;
+import ua.shop.captcha.CaptchaManager;
 import ua.shop.util.BufferedImageByteConvertor;
 import ua.shop.web.HttpAttributeNames;
 
@@ -34,8 +34,8 @@ public class CaptchaStreamer extends HttpServlet {
 	}
 
 	private BufferedImage getImage(HttpServletRequest req, HttpServletResponse resp) {
-		CaptchaProvider provider = (CaptchaProvider) req.getServletContext().getAttribute(HttpAttributeNames.CAPTCHA_PROVIDER);
-		return provider.getCaptcha(req, resp).getImage();
+		CaptchaManager captchaManager = (CaptchaManager) req.getServletContext().getAttribute(HttpAttributeNames.CAPTCHA_MANAGER);
+		return captchaManager.getCaptcha(req, resp).getImage();
 	}
 
 	private void writeImageBytesToStream(ServletOutputStream oStream, byte[] imageInByte) throws IOException {

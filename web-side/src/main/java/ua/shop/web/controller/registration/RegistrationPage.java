@@ -1,6 +1,7 @@
 package ua.shop.web.controller.registration;
 
-import ua.shop.captcha.provider.CaptchaProvider;
+import ua.shop.captcha.CaptchaManager;
+import ua.shop.web.HttpAttributeNames;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +21,8 @@ public class RegistrationPage extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		CaptchaProvider provider = (CaptchaProvider) req.getServletContext().getAttribute("captcha.provider");
-		provider.setCaptcha(req, resp);
+		CaptchaManager captchaManager = (CaptchaManager) req.getServletContext().getAttribute(HttpAttributeNames.CAPTCHA_MANAGER);
+		captchaManager.setCaptcha(req, resp);
 		req.getRequestDispatcher("/pages/register.jsp").forward(req, resp);
 	}
 

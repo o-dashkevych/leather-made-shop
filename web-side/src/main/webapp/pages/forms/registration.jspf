@@ -33,7 +33,14 @@
                 <input name="remember" type="checkbox" value="Remember Me">Remember Me
             </label>
         </div>
-        <tf:captcha-tag/>
+        <div id="captcha" class="form-group">
+            <tf:captcha-tag/>
+        </div>
+        <div id="captchaAnswerDiv" class="form-group">
+            <input class="form-control" placeholder="Enter numbers on image" id="captchaAnswer" name="captchaAnswer"
+                   type="text"
+                   value="">
+        </div>
         <!-- Change this to a button or input when using this as a form -->
         <input class="btn btn-lg btn-success btn-block" type="submit" id="registerSubmit" value="Register">
     </fieldset>

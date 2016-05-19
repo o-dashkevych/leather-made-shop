@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface CaptchaProvider {
 
-	void setCaptcha(HttpServletRequest request, HttpServletResponse response);
+	void setCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha);
 
 	Captcha getCaptcha(HttpServletRequest request, HttpServletResponse response);
 }

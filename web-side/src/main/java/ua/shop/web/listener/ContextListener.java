@@ -4,6 +4,7 @@ package ua.shop.web.listener; /**
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import ua.shop.captcha.CaptchaManager;
 import ua.shop.captcha.provider.CaptchaProvider;
 import ua.shop.captcha.provider.ContextCaptchaProvider;
 import ua.shop.captcha.util.CaptchaCleaner;
@@ -45,7 +46,8 @@ public class ContextListener implements ServletContextListener {
 		try {
 			CaptchaProvider provider = (CaptchaProvider) Class.forName(providerClass).newInstance();
 			setThreadCleanerIfContextProvider(provider, Long.valueOf(timeInterval));
-			servletContext.setAttribute(HttpAttributeNames.CAPTCHA_PROVIDER, provider);
+			CaptchaManager captchaManager = new CaptchaManager(provider);
+			servletContext.setAttribute(HttpAttributeNames.CAPTCHA_MANAGER, captchaManager);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			throw new ProviderException(e);
 		}

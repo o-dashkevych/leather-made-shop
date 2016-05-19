@@ -21,13 +21,19 @@ public class SimpleCaptchaGenerator {
 
 	private int height;
 
-	public SimpleCaptchaGenerator(int wight, int height) {
+	private int minFontSize;
+
+	private int maxFontSize;
+
+	public SimpleCaptchaGenerator(int wight, int height, int minFontSize, int maxFontSize) {
 		this.wight = wight;
 		this.height = height;
+		this.minFontSize = minFontSize;
+		this.maxFontSize = maxFontSize;
 	}
 
 	public Captcha generateCaptcha(String word) {
-		FontGenerator fontGenerator = new RandomFontGenerator(10, 15);
+		FontGenerator fontGenerator = new RandomFontGenerator(minFontSize, maxFontSize);
 		BackgroundGenerator backgroundGenerator = new FunkyBackgroundGenerator(wight, height);
 		TextPaster textPaster = new SimpleTextPaster(1, word.length(), Color.BLACK);
 		BufferedImage image = new ComposedWordToImage(fontGenerator, backgroundGenerator, textPaster).getImage(word);
@@ -35,10 +41,8 @@ public class SimpleCaptchaGenerator {
 		return new Captcha(word, image, timeStamp);
 	}
 
-	public Captcha generateCaptchaWithRandomWord() {
-		SimpleCaptchaGenerator generator = new SimpleCaptchaGenerator(100, 150);
-		String word = RandomGenerator.getRandomString(1, 4);
-		return generator.generateCaptcha(word);
+	public Captcha generateCaptchaWithRandomNumbers(Integer start, Integer end) {
+		String word = RandomGenerator.getRandomString(start, end);
+		return generateCaptcha(word);
 	}
-
 }
