@@ -1,7 +1,7 @@
 package ua.shop.web.controller.registration;
 
 import ua.shop.captcha.CaptchaManager;
-import ua.shop.util.BufferedImageByteConvertor;
+import ua.shop.util.BufferedImageByteConverter;
 import ua.shop.web.HttpAttributeNames;
 
 import javax.servlet.ServletException;
@@ -22,12 +22,14 @@ public class CaptchaStreamer extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		sendImage(req, resp);
+		synchronized (req.getSession()) {
+			sendImage(req, resp);
+		}
 	}
 
 	private void sendImage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		BufferedImage image = getImage(req, resp);
-		byte[] imageInByte = BufferedImageByteConvertor.convert(image);
+		byte[] imageInByte = BufferedImageByteConverter.convert(image);
 		resp.setContentType("image/jpg");
 		resp.setContentLength(imageInByte.length);
 		writeImageBytesToStream(resp.getOutputStream(), imageInByte);

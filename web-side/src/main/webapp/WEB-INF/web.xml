@@ -10,11 +10,11 @@
 
     <context-param>
         <param-name>interval</param-name>
-        <param-value>60000</param-value> <!--in millis-->
+        <param-value>30</param-value> <!--in seconds-->
     </context-param>
     <context-param>
         <param-name>provider</param-name>
-        <param-value>ua.shop.captcha.provider.HiddenFieldCaptchaProvider</param-value>
+        <param-value>ua.shop.captcha.provider.SessionProvider</param-value>
     </context-param>
 </web-app>
 

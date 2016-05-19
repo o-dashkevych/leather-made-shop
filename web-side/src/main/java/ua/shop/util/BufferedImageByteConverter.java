@@ -8,14 +8,14 @@ import java.io.IOException;
 /**
  * @author Oleg Dashkevych.
  */
-public class BufferedImageByteConvertor {
+public class BufferedImageByteConverter {
 
 	public static byte[] convert(BufferedImage image) throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write(image, "jpg", baos);
-		baos.flush();
-		byte[] imageInByte = baos.toByteArray();
-		baos.close();
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		ImageIO.write(image, "jpg", stream);
+		stream.flush();
+		byte[] imageInByte = stream.toByteArray();
+		stream.close();
 		return imageInByte;
 	}
 }

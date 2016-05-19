@@ -13,7 +13,7 @@ public class RepeatPasswordException extends ValidationException {
 	 */
 	@Override
 	public String getMessage() {
-		return ExceptionMessages.REPEAT_PASSWORD_EEXCEPTION;
+		return ExceptionMessages.REPEAT_PASSWORD_EXCEPTION;
 	}
 }
 

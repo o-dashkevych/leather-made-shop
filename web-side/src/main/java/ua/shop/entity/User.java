@@ -65,4 +65,27 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof User)) return false;
+
+		User user = (User) o;
+
+		if (!getName().equals(user.getName())) return false;
+		if (!getSurname().equals(user.getSurname())) return false;
+		if (!getPassword().equals(user.getPassword())) return false;
+		return getEmail().equals(user.getEmail());
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getName().hashCode();
+		result = 31 * result + getSurname().hashCode();
+		result = 31 * result + getPassword().hashCode();
+		result = 31 * result + getEmail().hashCode();
+		return result;
+	}
 }

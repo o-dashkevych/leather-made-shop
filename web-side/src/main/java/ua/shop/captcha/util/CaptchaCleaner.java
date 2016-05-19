@@ -1,5 +1,6 @@
 package ua.shop.captcha.util;
 
+import org.apache.log4j.Logger;
 import ua.shop.captcha.Captcha;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,6 +11,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class CaptchaCleaner implements Runnable {
 
+
+	private static final Logger LOGGER = Logger.getLogger(CaptchaCleaner.class);
 
 	private final AtomicBoolean isRunning = new AtomicBoolean(true);
 
@@ -46,7 +49,9 @@ public class CaptchaCleaner implements Runnable {
 	}
 
 	private void cleanOldCaptcha() {
+		LOGGER.info("Thread is cleaning " + captchaConcurrentHashMap.size());
 		captchaConcurrentHashMap.keySet().stream().filter(key -> isOld(captchaConcurrentHashMap.get(key))).forEach(captchaConcurrentHashMap::remove);
+		LOGGER.info("Thread cleaned " + captchaConcurrentHashMap.size());
 	}
 
 	private boolean isOld(Captcha captcha) {

@@ -1,47 +1,58 @@
 <%@include file="/fragments/encoding.jspf" %>
 <%@include file="/fragments/taglib.jspf" %>
 
-<form role="form" action="/register">
+<form role="form" action="/register" method="post">
     <fieldset>
         <div id="nameDiv" class="form-group">
-            <input class="form-control" placeholder="Name" id="name" name="name" type="text"
+            <input class="form-control" placeholder="Name" id="name" name="name" type="text" value="${name}"
                    autofocus>
         </div>
         <div id="surnameDiv" class="form-group">
-            <input class="form-control" placeholder="Surname" id="surname" name="surname" type="text"
+            <input class="form-control" placeholder="Surname" id="surname" name="surname" type="text" value="${surname}"
                    autofocus>
         </div>
         <div id="emailDiv" class="form-group">
-            <input class="form-control" placeholder="E-mail" id="email" name="email" type="text"
+            <input class="form-control" placeholder="E-mail" id="email" name="email" type="text" value="${email}"
                    autofocus>
         </div>
         <div id="emailRepeatDiv" class="form-group">
-            <input class="form-control" placeholder="Repeat e-mail" id="emailRepeat"
+            <input class="form-control" placeholder="Repeat e-mail" id="emailRepeat" value="${emailRepeat}"
                    name="emailRepeat" type="text" autofocus>
         </div>
         <div id="passwordDiv" class="form-group">
             <input class="form-control" placeholder="Password" name="password" id="password" type="password"
+                   value="${password}"
                    value="">
         </div>
         <div id="passwordRepeatDiv" class="form-group">
             <input class="form-control" placeholder="Repeat password" id="passwordRepeat" name="passwordRepeat"
+                   value="${passwordRepeat}"
                    type="password"
                    value="">
         </div>
         <div class="checkbox">
             <label>
-                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                <c:choose>
+                    <c:when test="${not empty newsletters}">
+                        <input name="newsletters" type="checkbox" checked value="Get news">Get news
+                    </c:when>
+                    <c:otherwise>
+                        <input name="newsletters" type="checkbox" value="Get news">Get news
+                    </c:otherwise>
+                </c:choose>
             </label>
         </div>
         <div id="captcha" class="form-group">
             <tf:captcha-tag/>
         </div>
         <div id="captchaAnswerDiv" class="form-group">
-            <input class="form-control" placeholder="Enter numbers on image" id="captchaAnswer" name="captchaAnswer"
+            <input class="form-control" placeholder="Enter numbers on image" id="captchaWord" name="captchaWord"
                    type="text"
                    value="">
         </div>
-        <!-- Change this to a button or input when using this as a form -->
+        <div class="form-group">
+            ${registration_exception}
+        </div>
         <input class="btn btn-lg btn-success btn-block" type="submit" id="registerSubmit" value="Register">
     </fieldset>
 </form>

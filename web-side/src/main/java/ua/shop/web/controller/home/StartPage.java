@@ -13,8 +13,10 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/home"}, name = "start-page")
 public class StartPage extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/pages/index.jsp").forward(req, resp);
-    }
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		synchronized (req.getSession()) {
+			req.getRequestDispatcher("/pages/index.jsp").forward(req, resp);
+		}
+	}
 }

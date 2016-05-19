@@ -20,13 +20,13 @@ public class UserValidator {
 	}
 
 	public static void validateName(String name) throws NameException {
-		if (!isName(name)) {
+		if (isNotName(name)) {
 			throw new NameException();
 		}
 	}
 
 	public static void validateSurname(String surname) throws SurnameException {
-		if (!isName(surname)) {
+		if (isNotName(surname)) {
 			throw new SurnameException();
 		}
 	}
@@ -39,7 +39,7 @@ public class UserValidator {
 	}
 
 	public static void validateRepeatPassword(String password, String repeatPassword) throws RepeatPasswordException {
-		if (!areSimilar(password, repeatPassword)) {
+		if (!areNotSimilar(password, repeatPassword)) {
 			throw new RepeatPasswordException();
 		}
 	}
@@ -53,26 +53,26 @@ public class UserValidator {
 	}
 
 	public static void validateRepeatEmail(String password, String repeatPassword) throws RepeatEmailException {
-		if (!areSimilar(password, repeatPassword)) {
+		if (!areNotSimilar(password, repeatPassword)) {
 			throw new RepeatEmailException();
 		}
 	}
 
-	private static boolean isName(String name) {
+	private static boolean isNotName(String name) {
 		String namePattern = "^([a-zA-Z]+[0-9]*){3,30}$";
-		return (StringUtils.isEmpty(name) || !name.matches(namePattern));
+		return (StringUtils.isEmpty(name) && name.matches(namePattern));
 	}
 
 	private static boolean areEmpty(String... args) {
 		for (String argument : args) {
 			if (StringUtils.isEmpty(argument)) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
-	private static boolean areSimilar(String firstParam, String secondParam) {
+	private static boolean areNotSimilar(String firstParam, String secondParam) {
 		return (!areEmpty(firstParam, secondParam) && firstParam.equals(secondParam));
 	}
 }

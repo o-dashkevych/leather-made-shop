@@ -6,13 +6,12 @@ import ua.shop.web.HttpAttributeNames;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Oleg Dashkevych.
  */
-public class HiddenFieldCaptchaProvider implements ContextCaptchaProvider {
+public class HiddenFieldCaptchaProvider extends ContextCaptchaProvider {
 
 	private static final Logger LOGGER = Logger.getLogger(HiddenFieldCaptchaProvider.class);
 
@@ -28,15 +27,9 @@ public class HiddenFieldCaptchaProvider implements ContextCaptchaProvider {
 		request.setAttribute(HttpAttributeNames.CAPTCHA_ID, id);
 	}
 
-	private String addCaptchaToMap(Captcha captcha) {
-		String id = UUID.randomUUID().toString();
-		captchaConcurrentHashMap.put(id, captcha);
-		return id;
-	}
-
 	@Override
-	public Captcha getCaptcha(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
+	public Captcha getCaptcha(HttpServletRequest request) {
+		String id = request.getParameter(HttpAttributeNames.CAPTCHA_ID);
 		return captchaConcurrentHashMap.get(id);
 	}
 }

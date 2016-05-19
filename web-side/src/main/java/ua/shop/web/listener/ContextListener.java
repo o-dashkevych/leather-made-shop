@@ -24,6 +24,8 @@ public class ContextListener implements ServletContextListener {
 
 	private static final Logger LOGGER = Logger.getLogger(ContextListener.class);
 
+	private CaptchaManager captchaManager;
+
 	/**
 	 * Default constructor
 	 */
@@ -45,26 +47,30 @@ public class ContextListener implements ServletContextListener {
 		String timeInterval = servletContext.getInitParameter("interval");
 		try {
 			CaptchaProvider provider = (CaptchaProvider) Class.forName(providerClass).newInstance();
-			setThreadCleanerIfContextProvider(provider, Long.valueOf(timeInterval));
-			CaptchaManager captchaManager = new CaptchaManager(provider);
+			captchaManager = new CaptchaManager(provider);
+			if (captchaManager.isContextManager()) {
+				setThreadCleaner(provider, Long.valueOf(timeInterval), servletContext);
+			}
 			servletContext.setAttribute(HttpAttributeNames.CAPTCHA_MANAGER, captchaManager);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			throw new ProviderException(e);
 		}
 	}
 
-	private void setThreadCleanerIfContextProvider(CaptchaProvider provider, long timeInterval) {
-		if (provider instanceof ContextCaptchaProvider) {
-			Thread mapCleaner = new Thread(new CaptchaCleaner(timeInterval, ((ContextCaptchaProvider) provider).getCaptchaConcurrentHashMap()));
-			mapCleaner.setDaemon(true);
-			mapCleaner.start();
-		}
+	private void setThreadCleaner(CaptchaProvider provider, long timeInterval, ServletContext context) {
+		Thread mapCleaner = new Thread(new CaptchaCleaner(timeInterval, ((ContextCaptchaProvider) provider).getCaptchaConcurrentHashMap()));
+		mapCleaner.start();
+		context.setAttribute(HttpAttributeNames.CAPTCHA_MAP_CLEANER, mapCleaner);
 	}
 
 	/**
 	 * Destroys listener
 	 */
 	public void contextDestroyed(ServletContextEvent sce) {
+		if (captchaManager.isContextManager()) {
+			CaptchaCleaner cleaner = (CaptchaCleaner) sce.getServletContext().getAttribute(HttpAttributeNames.CAPTCHA_MAP_CLEANER);
+			cleaner.stop();
+		}
 		LOGGER.debug(this.getClass().getName() + " ended");
 	}
 }

@@ -6,6 +6,7 @@ import ua.shop.captcha.provider.ContextCaptchaProvider;
 import ua.shop.captcha.util.SimpleCaptchaGenerator;
 import ua.shop.util.ConfigManager;
 import ua.shop.util.PropertyKeyNames;
+import ua.shop.web.HttpAttributeNames;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +18,9 @@ public class CaptchaManager {
 
 	private static final Logger LOGGER = Logger.getLogger(CaptchaManager.class);
 
-	private CaptchaProvider provider;
+	private final CaptchaProvider provider;
 
-	private ConfigManager configManager = new ConfigManager();
+	private final ConfigManager configManager = new ConfigManager();
 
 	public CaptchaManager(CaptchaProvider provider) {
 		this.provider = provider;
@@ -30,7 +31,15 @@ public class CaptchaManager {
 	}
 
 	public Captcha getCaptcha(HttpServletRequest request, HttpServletResponse response) {
-		return provider.getCaptcha(request, response);
+		return provider.getCaptcha(request);
+	}
+
+	public boolean validateCaptchaResponse(HttpServletRequest request, HttpServletResponse response) {
+		String enteredWord = request.getParameter(HttpAttributeNames.CAPTCHA_WORD);
+		Captcha captcha = getCaptcha(request, response);
+		if (captcha == null) return false;
+		String realWord = captcha.getWord();
+		return realWord.equals(enteredWord);
 	}
 
 	public boolean isContextManager() {

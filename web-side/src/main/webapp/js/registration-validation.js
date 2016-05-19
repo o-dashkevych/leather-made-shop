@@ -95,7 +95,7 @@ function setWarningIfInvalidName() {
 
 function setWarningIfInvalidSurname() {
     var isValidSurname = validateName("surname");
-    addOrRemoveWarningFunction(setWarningIfInvalidName, isValidSurname);
+    addOrRemoveWarningFunction(setWarningIfInvalidSurname, isValidSurname);
     setWarningTextIfInvalid("surnameDiv", "warningSurname", "Invalid surname", isValidSurname);
 }
 

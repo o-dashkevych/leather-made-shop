@@ -17,13 +17,13 @@ import java.awt.image.BufferedImage;
  */
 public class SimpleCaptchaGenerator {
 
-	private int wight;
+	private final int wight;
 
-	private int height;
+	private final int height;
 
-	private int minFontSize;
+	private final int minFontSize;
 
-	private int maxFontSize;
+	private final int maxFontSize;
 
 	public SimpleCaptchaGenerator(int wight, int height, int minFontSize, int maxFontSize) {
 		this.wight = wight;

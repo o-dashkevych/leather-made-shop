@@ -12,5 +12,5 @@ public interface CaptchaProvider {
 
 	void setCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha);
 
-	Captcha getCaptcha(HttpServletRequest request, HttpServletResponse response);
+	Captcha getCaptcha(HttpServletRequest request);
 }
