@@ -3,9 +3,9 @@ package ua.shop.web.controller.registration;
 import ua.shop.captcha.CaptchaManager;
 import ua.shop.entity.User;
 import ua.shop.exceptions.ExceptionMessages;
-import ua.shop.exceptions.ValidationException;
 import ua.shop.service.UserService;
 import ua.shop.web.HttpAttributeNames;
+import ua.shop.web.controller.registration.util.RegisterRequestDataOperator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,16 +38,13 @@ public class RegistrationPage extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		synchronized (req.getSession()) {
-			try {
-				RegisterRequestDataOperator.setAttributesFromParams(req);
-				RegisterRequestDataOperator.validateInputParameters(req);
-				validateCaptchaEquality(req, resp);
-				validateUserRegistration(req, resp);
-			} catch (ValidationException e) {
-				req.setAttribute(HttpAttributeNames.REGISTRATION_EXCEPTION_ATTRIBUTE, e.getMessage());
-				doGet(req, resp);
-			}
+			RegisterRequestDataOperator operator = new RegisterRequestDataOperator();
+			operator.setAttributesFromParams(req);
+			operator.validateInputParametersAndPutExceptionsMap(req);
+			validateCaptchaEquality(req, resp);
+			validateUserRegistration(req, resp);
 			resp.sendRedirect("/pages/index.jsp");
+			//TODO move attributes from session to req and shoe exc on registration.jspf
 		}
 	}
 

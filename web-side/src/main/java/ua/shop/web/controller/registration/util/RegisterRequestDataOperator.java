@@ -1,9 +1,6 @@
-package ua.shop.web.controller.registration;
+package ua.shop.web.controller.registration.util;
 
 import ua.shop.entity.User;
-import ua.shop.exceptions.RepeatEmailException;
-import ua.shop.exceptions.RepeatPasswordException;
-import ua.shop.exceptions.ValidationException;
 import ua.shop.util.UserValidator;
 import ua.shop.web.HttpAttributeNames;
 
@@ -15,22 +12,26 @@ import javax.servlet.http.HttpSession;
  */
 public class RegisterRequestDataOperator {
 
-	public static void validateInputParameters(HttpServletRequest request) throws ValidationException {
-		UserValidator.validateUser(composeUserFromParams(request));
+	private UserValidator validator = new UserValidator();
+
+	public void validateInputParametersAndPutExceptionsMap(HttpServletRequest request) {
+		User user = composeUserFromParams(request);
+		validator.putUserValidationExceptionsToMap(user);
 		validateRepeatEmails(request);
 		validateRepeatPasswords(request);
+		request.setAttribute("exceptions", validator.getExceptionMapAndClear());
 	}
 
-	private static void validateRepeatEmails(HttpServletRequest request) throws RepeatEmailException {
+	private void validateRepeatEmails(HttpServletRequest request) {
 		String email = request.getParameter(HttpAttributeNames.REGISTRATION_EMAIL);
 		String repeatEmail = request.getParameter(HttpAttributeNames.REGISTRATION_REPEAT_EMAIL);
-		UserValidator.validateRepeatEmail(email, repeatEmail);
+		validator.putRepeatEmailValidationExceptionsToMap(email, repeatEmail);
 	}
 
-	private static void validateRepeatPasswords(HttpServletRequest request) throws RepeatPasswordException {
+	private void validateRepeatPasswords(HttpServletRequest request) {
 		String password = request.getParameter(HttpAttributeNames.REGISTRATION_PASSWORD);
 		String repeatPassword = request.getParameter(HttpAttributeNames.REGISTRATION_REPEAT_PASSWORD);
-		UserValidator.validateRepeatPassword(password, repeatPassword);
+		validator.putRepeatPasswordValidationExceptionsToMap(password, repeatPassword);
 	}
 
 	public static User composeUserFromParams(HttpServletRequest request) {
@@ -42,7 +43,7 @@ public class RegisterRequestDataOperator {
 		return user;
 	}
 
-	public static void setAttributesFromParams(HttpServletRequest request) {
+	public void setAttributesFromParams(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.setAttribute(HttpAttributeNames.REGISTRATION_NAME, request.getParameter(HttpAttributeNames.REGISTRATION_NAME));
 		session.setAttribute(HttpAttributeNames.REGISTRATION_SURNAME, request.getParameter(HttpAttributeNames.REGISTRATION_SURNAME));
